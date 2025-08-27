@@ -8,11 +8,20 @@ class ContactManager
 {
     public function __construct(private PDO $pdo) {}
 
-    public function findAll() : Array
+    public function findAll() : array
     {
-        $contactsStmt = $this->pdo->prepare('SELECT * FROM contact');
-        $contactsStmt->execute();
-        $contacts = $contactsStmt->fetchAll(PDO::FETCH_ASSOC);
+        $contactsData = $this->pdo->query('SELECT * FROM contact')->fetchAll(PDO::FETCH_ASSOC);
+
+        $contacts = [];
+
+        foreach ($contactsData as $contact) {
+            $contacts[] = new Contact(
+                $contact['id'] ?? null,
+                $contact['name'] ?? null,
+                $contact['email'] ?? null,
+                $contact['phone_number'] ?? null
+            );
+        }
 
         var_dump($contacts);
 

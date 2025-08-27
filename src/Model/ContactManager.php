@@ -4,7 +4,8 @@ namespace App\Model;
 
 use PDO;
 
-class ContactManager {
+class ContactManager
+{
     public function __construct(private PDO $pdo) {}
 
     public function findAll() : Array

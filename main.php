@@ -12,14 +12,10 @@ spl_autoload_register(static function ($fqcn): void {
 
 use App\Config\DBConnect;
 use App\Model\ContactManager;
+use App\Model\Contact;
 
 $db = new DBConnect();
 $pdo = $db->getPDO();
-
-var_dump($pdo);
-
-$contactManager = new ContactManager($pdo);
-$contacts = $contactManager->findAll();
 
 while (true) {
     $line = readline("Entrez votre commande : ");
@@ -27,7 +23,17 @@ while (true) {
 
     switch ($line) {
         case 'list':
-            echo "Affichage de la liste\n";
+            $contactManager = new ContactManager($pdo);
+            $contacts = $contactManager->findAll();
+
+            if (empty($contacts)) {
+                echo "Aucun contact trouvé\n";
+            } else {
+                foreach ($contacts as $contact) {
+                    echo $contact, "\n";
+                }
+            }
+
             break;
         default:
             echo "Commande inconnue\n";

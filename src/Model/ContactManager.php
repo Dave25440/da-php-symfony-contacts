@@ -16,14 +16,12 @@ class ContactManager
 
         foreach ($contactsData as $contact) {
             $contacts[] = new Contact(
-                $contact['id'] ?? null,
+                $contact['contact_id'] ?? null,
                 $contact['name'] ?? null,
                 $contact['email'] ?? null,
                 $contact['phone_number'] ?? null
             );
         }
-
-        var_dump($contacts);
 
         return $contacts;
     }

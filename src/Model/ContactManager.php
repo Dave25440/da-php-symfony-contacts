@@ -25,4 +25,23 @@ class ContactManager
 
         return $contacts;
     }
+
+    public function findById(int $id) : ?Contact
+    {
+        $contactStmt = $this->pdo->prepare('SELECT * FROM contact WHERE contact_id = :id');
+        $contactStmt->execute(['id' => $id]);
+        
+        $contact = $contactStmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$contact) {
+            return null;
+        }
+
+        return new Contact(
+            $contact['contact_id'] ?? null,
+            $contact['name'] ?? null,
+            $contact['email'] ?? null,
+            $contact['phone_number'] ?? null
+        );
+    }
 }

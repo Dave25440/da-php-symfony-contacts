@@ -60,6 +60,22 @@ class ContactManager
         }
     }
 
+    public function modifyContact(int $id, string $name, string $email, string $phoneNumber): void
+    {
+        try {
+            $updateContact = $this->pdo->prepare('UPDATE contact SET name = :name, email = :email, phone_number = :phone_number WHERE contact_id = :id');
+            $updateContact->execute([
+                'id' => $id,
+                'name' => $name,
+                'email' => $email,
+                'phone_number' => $phoneNumber,
+            ]);
+        } catch (\Exception $e) {
+            error_log('Erreur de mise à jour : ' . $e->getMessage());
+            throw new \Exception('Impossible de modifier le contact.');
+        }
+    }
+
     public function removeContact(int $id): void
     {
         try {

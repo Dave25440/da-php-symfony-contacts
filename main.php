@@ -37,6 +37,12 @@ while (true) {
         $email = $matches[2];
         $phoneNumber = $matches[3];
         $command->create($name, $email, $phoneNumber);
+    } elseif (preg_match('/^modify\s+(\d+),\s*([^,]+),\s*([^,]+),\s*(.+)$/', $line, $matches)) {
+        $id = (int)$matches[1];
+        $name = $matches[2];
+        $email = $matches[3];
+        $phoneNumber = $matches[4];
+        $command->modify($id, $name, $email, $phoneNumber);
     } elseif (preg_match('/^delete\s+(\d+)$/', $line, $matches)) {
         $id = (int)$matches[1];
         $command->delete($id);

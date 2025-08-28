@@ -39,4 +39,24 @@ class Command
             echo $contact, "\n";
         }
     }
+
+    public function create(string $name, string $email, string $phoneNumber) : void
+    {
+        if (empty(trim($name)) || empty(trim($email)) || empty(trim($phoneNumber))) {
+            echo "Erreur : tous les champs sont requis\n";
+            return;
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo "Erreur : email invalide\n";
+            return;
+        }
+
+        try {
+            $this->contactManager->addContact($name, $email, $phoneNumber);
+            echo "Contact ajouté avec succès\n";
+        } catch (\Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+    }
 }

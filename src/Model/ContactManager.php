@@ -44,4 +44,19 @@ class ContactManager
             $contact['phone_number'] ?? null
         );
     }
+
+    public function addContact(string $name, string $email, string $phoneNumber): void
+    {
+        try {
+            $insertContact = $this->pdo->prepare('INSERT INTO contact(name, email, phone_number) VALUES (:name, :email, :phone_number)');
+            $insertContact->execute([
+                'name' => $name,
+                'email' => $email,
+                'phone_number' => $phoneNumber,
+            ]);
+        } catch (\Exception $e) {
+            error_log('Erreur d\'insertion : ' . $e->getMessage());
+            throw new \Exception('Impossible d\'ajouter le contact.');
+        }
+    }
 }

@@ -27,6 +27,11 @@ while (true) {
     } elseif (preg_match('/^detail\s+(\d+)$/', $line, $matches)) {
         $id = (int)$matches[1];
         $command->detail($id);
+    } elseif (preg_match('/^create\s+([^,]+),\s*([^,]+),\s*(.+)$/', $line, $matches)) {
+        $name = $matches[1];
+        $email = $matches[2];
+        $phoneNumber = $matches[3];
+        $command->create($name, $email, $phoneNumber);
     } else {
         echo "Commande inconnue ou incomplète\n";
     }

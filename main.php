@@ -28,33 +28,50 @@ $command = new Command($pdo);
 
 while (true) {
     $line = readline("Entrez votre commande : ");
-    echo "Vous avez saisi : $line\n";
 
     if ($line === 'quit') {
         echo "Au revoir\n";
         break;
-    } elseif ($line === 'help') {
+    }
+
+    elseif ($line === 'help') {
         $command->help();
-    } elseif ($line === 'list') {
+    }
+
+    elseif ($line === 'list') {
         $command->list();
-    } elseif (preg_match('/^detail\s+(\d+)$/', $line, $matches)) {
+    }
+
+    // Expression régulière pour vérifier le format de l'entrée : 'detail' + espace(s) + entier (id)
+    elseif (preg_match('/^detail\s+(\d+)$/', $line, $matches)) {
         $id = (int)$matches[1];
         $command->detail($id);
-    } elseif (preg_match('/^create\s+([^,]+),\s*([^,]+),\s*(.+)$/', $line, $matches)) {
+    }
+
+    // 'create' + espace(s) + chaîne (nom), chaîne (email), chaîne (téléphone)
+    elseif (preg_match('/^create\s+([^,]+),\s*([^,]+),\s*(.+)$/', $line, $matches)) {
         $name = $matches[1];
         $email = $matches[2];
         $phoneNumber = $matches[3];
         $command->create($name, $email, $phoneNumber);
-    } elseif (preg_match('/^modify\s+(\d+),\s*([^,]+),\s*([^,]+),\s*(.+)$/', $line, $matches)) {
+    }
+
+    // 'modify' + espace(s) + entier (id), chaîne (nom), chaîne (email), chaîne (téléphone)
+    elseif (preg_match('/^modify\s+(\d+),\s*([^,]+),\s*([^,]+),\s*(.+)$/', $line, $matches)) {
         $id = (int)$matches[1];
         $name = $matches[2];
         $email = $matches[3];
         $phoneNumber = $matches[4];
         $command->modify($id, $name, $email, $phoneNumber);
-    } elseif (preg_match('/^delete\s+(\d+)$/', $line, $matches)) {
+    }
+
+    // 'delete' + espace(s) + entier (id)
+    elseif (preg_match('/^delete\s+(\d+)$/', $line, $matches)) {
         $id = (int)$matches[1];
         $command->delete($id);
-    } else {
+    }
+
+    else {
         echo "Commande inconnue ou incomplète\n";
     }
 }

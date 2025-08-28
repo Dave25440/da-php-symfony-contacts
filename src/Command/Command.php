@@ -67,6 +67,7 @@ EOD;
     {
         $contacts = $this->contactManager->findAll();
 
+        // Vérifie la présence de contacts dans la liste avant de l'afficher
         if (empty($contacts)) {
             echo "Aucun contact trouvé\n";
         } else {
@@ -80,6 +81,7 @@ EOD;
     {
         $contact = $this->contactManager->findById($id);
 
+        // Vérifie l'existence du contact avant de l'afficher
         if ($contact === null) {
             echo "Contact introuvable\n";
         } else {
@@ -89,11 +91,13 @@ EOD;
 
     public function create(string $name, string $email, string $phoneNumber) : void
     {
+        // Vérifie la présence de contenu dans chaque champ
         if (empty(trim($name)) || empty(trim($email)) || empty(trim($phoneNumber))) {
             echo "Erreur : tous les champs sont requis\n";
             return;
         }
 
+        // Vérifie le format de l'email
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             echo "Erreur : email invalide\n";
             return;

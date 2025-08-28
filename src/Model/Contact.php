@@ -51,6 +51,7 @@ class Contact
         $this->phoneNumber = $phoneNumber;
     }
 
+    // Méthode magique pour retourner l'objet sous forme de chaîne de caractères
     public function __toString() : string
     {
         return sprintf(

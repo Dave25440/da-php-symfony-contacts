@@ -33,6 +33,7 @@ class ContactManager
         
         $contact = $contactStmt->fetch(PDO::FETCH_ASSOC);
 
+        // Retourne null si le contact n'est pas trouvé
         if (!$contact) {
             return null;
         }

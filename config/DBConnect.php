@@ -20,6 +20,7 @@ class DBConnect
 
     public function getPDO(): PDO
     {
+        // Vérifie l'existence d'une instance PDO avant de la créer
         if ($this->pdo === null) {
             try {
                 $this->pdo = new PDO(

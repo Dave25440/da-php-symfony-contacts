@@ -76,4 +76,47 @@ class Command
             echo $e->getMessage() . "\n";
         }
     }
+
+    public function help(): void
+    {
+        echo <<<'EOD'
+Entrez votre commande : aide
+
+=== Commandes ===
+
+help : affiche cette aide
+list : liste les contacts
+detail [id] : affiche un contact
+create [name], [email], [phone number] : crée un contact
+delete [id] : supprime un contact
+quit : quitte le programme
+
+Attention à la syntaxe des commandes, les espaces et virgules sont importants.
+
+=== Affichage ===
+
+Contact #id : name, Email : email, Téléphone : phone number
+
+=== Exemples ===
+
+Entrez votre commande : list
+Contact #1 : Gandalf le gris, Email : gandalf@istari.com, Téléphone : 01013021
+Contact #2 : Buffy Summer, Email : buffy@sunnydale.com, Téléphone : 01091901
+Contact #3 : Hermione Granger, Email : hermione@magie.com, Téléphone : 19091979
+
+Entrez votre commande : detail 1
+Contact #1 : Gandalf le gris, Email : gandalf@istari.com, Téléphone : 01013021
+
+Entrez votre commande : create David Horès, dhores@dev.com, 20250827
+Contact ajouté avec succès
+
+Entrez votre commande : delete 3
+Contact supprimé avec succès
+
+Entrez votre commande : quit
+Au revoir
+
+
+EOD;
+    }
 }

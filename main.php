@@ -25,6 +25,8 @@ while (true) {
     if ($line === 'quit') {
         echo "Au revoir\n";
         break;
+    } elseif ($line === 'help') {
+        $command->help();
     } elseif ($line === 'list') {
         $command->list();
     } elseif (preg_match('/^detail\s+(\d+)$/', $line, $matches)) {

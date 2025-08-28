@@ -11,11 +11,11 @@ class DBConnect
     private ?PDO $pdo = null;
 
     public function __construct(
-        private string $host = 'localhost',
-        private string $name = 'contacts',
-        private int $port = 3306,
-        private string $user = 'root',
-        private string $password = ''
+        private string $host,
+        private string $name,
+        private int $port,
+        private string $user,
+        private string $password
     ) {}
 
     public function getPDO(): PDO

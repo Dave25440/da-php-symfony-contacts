@@ -10,10 +10,18 @@ spl_autoload_register(static function ($fqcn): void {
     require_once $path;
 });
 
+$config = require_once __DIR__ . '/config/config.php';
+
 use App\Config\DBConnect;
 use App\Command\Command;
 
-$db = new DBConnect();
+$db = new DBConnect(
+    $config['db_host'],
+    $config['db_name'],
+    $config['db_port'],
+    $config['db_user'],
+    $config['db_password']
+);
 $pdo = $db->getPDO();
 
 $command = new Command($pdo);

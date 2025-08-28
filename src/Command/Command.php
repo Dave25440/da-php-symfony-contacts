@@ -59,4 +59,21 @@ class Command
             echo $e->getMessage() . "\n";
         }
     }
+
+    public function delete(int $id) : void
+    {
+        $contact = $this->contactManager->findById($id);
+
+        if ($contact === null) {
+            echo "Contact introuvable\n";
+            return;
+        }
+
+        try {
+            $this->contactManager->removeContact($id);
+            echo "Contact supprimé avec succès\n";
+        } catch (\Exception $e) {
+            echo $e->getMessage() . "\n";
+        }
+    }
 }

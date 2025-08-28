@@ -59,4 +59,15 @@ class ContactManager
             throw new \Exception('Impossible d\'ajouter le contact.');
         }
     }
+
+    public function removeContact(int $id): void
+    {
+        try {
+            $deleteContact = $this->pdo->prepare('DELETE FROM contact WHERE contact_id = :id');
+            $deleteContact->execute(['id' => $id]);
+        } catch (\Exception $e) {
+            error_log('Erreur de suppression : ' . $e->getMessage());
+            throw new \Exception('Impossible de supprimer le contact.');
+        }
+    }
 }

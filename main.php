@@ -32,6 +32,9 @@ while (true) {
         $email = $matches[2];
         $phoneNumber = $matches[3];
         $command->create($name, $email, $phoneNumber);
+    } elseif (preg_match('/^delete\s+(\d+)$/', $line, $matches)) {
+        $id = (int)$matches[1];
+        $command->delete($id);
     } else {
         echo "Commande inconnue ou incomplète\n";
     }

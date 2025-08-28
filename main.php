@@ -22,7 +22,10 @@ while (true) {
     $line = readline("Entrez votre commande : ");
     echo "Vous avez saisi : $line\n";
 
-    if ($line === 'list') {
+    if ($line === 'quit') {
+        echo "Au revoir\n";
+        break;
+    } elseif ($line === 'list') {
         $command->list();
     } elseif (preg_match('/^detail\s+(\d+)$/', $line, $matches)) {
         $id = (int)$matches[1];
